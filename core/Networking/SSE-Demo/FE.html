@@ -1,0 +1,55 @@
+<!--
+ * @Author: Li yli2935@uwo.ca
+ * @Date: 2026-01-10 17:57:36
+ * @LastEditors: Li
+ * @LastEditTime: 2026-01-10 17:57:40
+ * @FilePath: /System-Design/core/Networking/SSE-Demo/FE.html
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SSE Follow Notify Demo</title>
+    <style>
+      #toast {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: #111;
+        color: #fff;
+        padding: 10px 12px;
+        border-radius: 10px;
+        display: none;
+        max-width: 240px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Demo: 被关注用户的页面</h3>
+    <p>打开控制台看日志。默认订阅 user_id = <b>alice</b></p>
+    <div id="toast"></div>
+
+    <script>
+      const userId = "alice";
+      const toast = document.getElementById("toast");
+
+      function showToast(text) {
+        toast.textContent = text;
+        toast.style.display = "block";
+        setTimeout(() => (toast.style.display = "none"), 2500);
+      }
+
+      const es = new EventSource(`http://localhost:8000/events/${userId}`);
+
+      es.addEventListener("notify", (e) => {
+        const data = JSON.parse(e.data);
+        if (data.type === "follow") {
+          showToast(`${data.from} 关注了你`);
+        }
+      });
+
+      es.onerror = () => console.log("SSE error (browser will auto-reconnect)");
+    </script>
+  </body>
+</html>
