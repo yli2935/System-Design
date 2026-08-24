@@ -1,0 +1,2 @@
+# upload_id	name	mime_type	content_hash	chunk_size	total_chunks	owner	created_at
+9543f6ec83cd	big.bin	application/octet-stream	b57b64b198d5d59ce5a22a9b9f25e72a7d081476d432051aa923f3dbebb90934	102400	3	alice	2026-08-21T21:48:43

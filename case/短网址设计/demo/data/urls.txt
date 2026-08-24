@@ -1,0 +1,4 @@
+# short_code	long_url
+1000000	https://en.wikipedia.org/wiki/Systems_design
+1000001	https://fastapi.tiangolo.com/
+1000002	https://www.python.org/
